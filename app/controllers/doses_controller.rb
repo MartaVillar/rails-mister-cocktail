@@ -1,16 +1,17 @@
 class DosesController < ApplicationController
 
   def new
-    @dose = Doses.new
+    @dose = Dose.new
   end
 
   def create
-    @dose = Doses.new(doses_params)
+    @dose = Dose.new(doses_params)
+    @dose.cocktail_id = params["cocktail_id"].to_i
     @dose.save
-    redirect_to cocktail_path(@cocktail)
+    redirect_to cocktail_path(@dose.cocktail)
   end
 
   def doses_params
-    params.require(:restaurant).permit(:description)
+    params.require(:dose).permit(:description, :ingredient, :ingredient_id)
   end
 end

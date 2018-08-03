@@ -1,4 +1,6 @@
 <h1>Create a new dose</h1>
-<% doses.each do |dose| %>
-<%= @doses.description %>
+<%= simple_form_for @dose, url:  cocktail_doses_path do |f| %>
+<%= f.association :ingredient, collection: Ingredient.all %>
+<%= f.input :description %>
+<%= f.button :submit %>
 <% end %>
